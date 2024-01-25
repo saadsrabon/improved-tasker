@@ -1,5 +1,5 @@
-
-
+import logo from './assets/lws-logo-en.svg'
+import frame from './assets/frame.png'
 function App() {
   
   return (
@@ -9,7 +9,7 @@ function App() {
 		<div className="container mx-auto flex items-center justify-between gap-x-6">
 			{/* <!-- Logo --> */}
 			<a href="/">
-				<img className="h-[45px]" src="./assets/lws-logo-en.svg" alt="Lws" />
+				<img className="h-[45px]" src={logo} alt="Lws" />
 			</a>
 			{/* <!-- Logo Ends --> */}
 		</div>
@@ -21,7 +21,7 @@ function App() {
 		<div className="container lg:px-20">
 			<div className="grid items-center gap-6 md:grid-cols-2">
 				<div className="flex justify-center md:order-2">
-					<img className="max-md:w-full" src="./assets/frame.png" width="326" height="290" alt="frame" />
+					<img className="max-md:w-full" src={frame} width="326" height="290" alt="frame" />
 				</div>
 				<div>
 					<h1 className="mb-1.5 text-[56px] font-bold leading-none text-[#F5BF42] lg:text-[73px]">
