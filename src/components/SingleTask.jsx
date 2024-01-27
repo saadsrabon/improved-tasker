@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 
+import {  useTasksDispatch } from "../utils/Utils"
 import Tag from "./tag"
 
 
 const SingleTask = ({task}) => {
-    const    color = "#"+Math.floor(Math.random()*16777215).toString(16);
+    const dispacth =useTasksDispatch()
     const {isfavourite,Description,Tags,Priority,Title,id}=task
+
   return (
     <tr className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
 								<td>{
@@ -33,14 +35,17 @@ const SingleTask = ({task}) => {
 									<ul className="flex justify-center gap-1.5 flex-wrap">
 										
 										{Tags.map((tag) => (
-                                            <Tag key={tag} tag={tag} color={color}/>
+                                            <Tag key={tag} tag={tag} />
                                         ))}
 									</ul>
 								</td>
 								<td className="text-center">High</td>
 								<td>
 									<div className="flex items-center justify-center space-x-3">
-										<button className="text-red-500">Delete</button>
+										<button onClick={()=>dispacth({
+                                            type:'DELETE_TASK',
+                                            payload:id
+                                        })} className="text-red-500">Delete</button>
 										<button className="text-blue-500">Edit</button>
 									</div>
 								</td>
