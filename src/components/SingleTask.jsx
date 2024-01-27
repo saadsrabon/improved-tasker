@@ -3,7 +3,7 @@
 import {  useTasksDispatch } from "../utils/Utils"
 import Tag from "./tag"
 
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const SingleTask = ({task}) => {
     const dispacth =useTasksDispatch()
@@ -67,9 +67,10 @@ const SingleTask = ({task}) => {
 									</div>
 								</td>
 							</tr>
+
+							
 		
 		
-										<ToastContainer  />
   </>
   )
 }
