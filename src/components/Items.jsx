@@ -1,8 +1,10 @@
+import { useTasks } from "../utils/Utils"
 import SingleTask from "./SingleTask"
 import TableHead from "./TableHead"
 
 
 const Items = () => {
+    const tasks = useTasks()
   return (
     <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 				<div className="mb-14 items-center justify-between sm:flex">
@@ -33,9 +35,10 @@ const Items = () => {
 					<table className="table-fixed overflow-auto xl:w-full">
 						<TableHead/>
 						<tbody>
-
-							<SingleTask/>
-							
+                    {
+                    tasks.map((task) => (
+                     <SingleTask key={task.id} task={task}/>
+                         ))}
 						</tbody>
 					</table>
 				</div>

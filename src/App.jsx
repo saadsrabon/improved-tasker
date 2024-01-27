@@ -1,8 +1,9 @@
 
-import frame from './assets/frame.png'
+
 import HeroSection from './components/HeroSection'
 import Items from './components/Items'
 import Navbar from './components/Navbar'
+import { TasksProvider } from './context/TaskContext'
 function App() {
   
   return (
@@ -14,7 +15,10 @@ function App() {
 		<div className="container">
            <HeroSection/>
 		{/* <!-- Search Box Ends --> */}
+
+		<TasksProvider>
 			<Items/>
+			</TasksProvider>
 		</div>
 	</section>
 	{/* <!-- End Table --> */}
