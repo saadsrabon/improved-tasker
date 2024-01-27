@@ -2,7 +2,7 @@ export  const initialTasks=[
     {
       "id": 1,
       "Title": "Complete Project Proposal",
-      "Priority": "High",
+      "Priority": "high",
       "Tags": ["Work", "Project"],
       "Description": "Prepare and finalize the project proposal for client review.",
       "isfavourite":false
@@ -10,7 +10,7 @@ export  const initialTasks=[
     {
       "id": 2,
       "Title": "Buy Groceries",
-      "Priority": "Medium",
+      "Priority": "medium",
       "Tags": ["Personal", "Shopping"],
       "Description": "Visit the grocery store and purchase the items on the shopping list."
     , "isfavourite":false
@@ -18,7 +18,7 @@ export  const initialTasks=[
     {
       "id": 3,
       "Title": "Exercise",
-      "Priority": "Low",
+      "Priority": "low",
       "Tags": ["Health", "Fitness"],
       "Description": "Go for a 30-minute jog or do a home workout to stay active."
       , "isfavourite":false
@@ -26,7 +26,7 @@ export  const initialTasks=[
     {
       "id": 4,
       "Title": "Read Book",
-      "Priority": "Medium",
+      "Priority": "medium",
       "Tags": ["Personal", "Leisure"],
       "Description": "Spend at least 30 minutes reading the current book on the reading list."
       , "isfavourite":false
@@ -34,7 +34,7 @@ export  const initialTasks=[
     {
       "id": 5,
       "Title": "Implement Feature X",
-      "Priority": "High",
+      "Priority": "high",
       "Tags": ["Work", "Programming"],
       "Description": "Code and test the implementation of feature X in the software project."
     , "isfavourite":false
@@ -42,7 +42,7 @@ export  const initialTasks=[
     {
       "id": 6,
       "Title": "Update Website Content",
-      "Priority": "Medium",
+      "Priority": "medium",
       "Tags": ["Work", "Website"],
       "Description": "Review and update the content on the company website to reflect the latest information."
      , "isfavourite":true
@@ -50,7 +50,7 @@ export  const initialTasks=[
     {
       "id": 7,
       "Title": "Debug Issue in Codebase",
-      "Priority": "High",
+      "Priority": "high",
       "Tags": ["Work", "Programming"],
       "Description": "Investigate and fix the reported bug in the codebase."
     , "isfavourite":false
@@ -58,7 +58,7 @@ export  const initialTasks=[
     {
       "id": 8,
       "Title": "Research New Web Technologies",
-      "Priority": "Medium",
+      "Priority": "medium",
       "Tags": ["Learning", "Website"],
       "Description": "Explore and study the latest web technologies to stay updated in the field."
       , "isfavourite":false

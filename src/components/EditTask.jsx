@@ -1,18 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-import { getNextId, notifyAdd, useTasks, useTasksDispatch } from "../utils/Utils"
+import {  notifyEdit,  useTasksDispatch } from "../utils/Utils"
 
 
-const AddTask = ({setShowAddTask}) => {
-  const tasks =useTasks()
+const EditTask = ({task ,setShowEditTask}) => {
+   
    const [data , setData] = useState({
-      Title:"",
-      Description:"",
-      Tags:[],
-      Priority:"",
-      isfavourite:false
+      id:task.id,
+      Title:task.Title,
+      Description:task.Description,
+      Tags:[...task.Tags],
+      Priority:task.Priority,
+      isfavourite:task.isfavourite
     })
-    const dispacth =useTasksDispatch()
+    const dispatch =useTasksDispatch()
     const handleSubmit = (e) => {
         e.preventDefault();
         if(data.Title==="" || data.Description==="" || data.Tags.length===0 || data.Priority===""){
@@ -21,13 +22,13 @@ const AddTask = ({setShowAddTask}) => {
         else{
             setData({...data,isfavourite:false})
             
-                dispacth({
-                    type: 'ADD_TASK',
-                    payload: {...data,id:getNextId(tasks)},
+                dispatch({
+                    type: 'UPDATE_TASK',
+                    payload: data,
                 });
 
-                notifyAdd()
-                setShowAddTask(false)
+                notifyEdit()
+                setShowEditTask(false)
               
         }
     }
@@ -48,6 +49,7 @@ const AddTask = ({setShowAddTask}) => {
         <div className="space-y-2 lg:space-y-3">
           <label htmlFor="title">Title</label>
           <input
+          defaultValue={task.Title}
           onChange={(e)=>setData({...data,Title:e.target.value})}
             className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
             type="text"
@@ -60,6 +62,7 @@ const AddTask = ({setShowAddTask}) => {
         <div className="space-y-2 lg:space-y-3">
           <label htmlFor="description">Description</label>
           <textarea
+            defaultValue={task.Description}
           onChange={(e)=>setData({...data,Description:e.target.value})}
             className="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
             type="text"
@@ -76,6 +79,7 @@ const AddTask = ({setShowAddTask}) => {
           <div className="space-y-2 lg:space-y-3">
             <label htmlFor="tags">Tags</label>
             <input
+            defaultValue={task.Tags}
             onChange={(e)=>setData({...data,Tags:e.target.value.split(",")})}
               className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
               type="text"
@@ -89,11 +93,14 @@ const AddTask = ({setShowAddTask}) => {
 
             <label htmlFor="priority">Priority</label>
             <select
+           
             onChange={(e)=>setData({...data,Priority:e.target.value})}
               className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
               name="priority"
               id="priority"
               required
+              selected={task.Priority}
+              defaultValue={task.Priority}
             >
               <option value="">Select Priority</option>
               <option value="low">Low</option>
@@ -109,11 +116,11 @@ const AddTask = ({setShowAddTask}) => {
           type="submit"
           className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
         >
-          Create new Task
+           Edit Task
         </button>
       </div>
     </form>
   )
 }
 
-export default AddTask
+export default EditTask

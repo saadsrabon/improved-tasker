@@ -1,13 +1,17 @@
 import { useState } from "react"
-import { useTasks } from "../utils/Utils"
+import { notify, useTasks, useTasksDispatch } from "../utils/Utils"
 import SingleTask from "./SingleTask"
 import TableHead from "./TableHead"
+import AddTask from "./AddTask"
+import EditTask from './EditTask';
 
 
 const Items = () => {
     const [search, setsearch] =useState('')
-    const tasks = useTasks()
-
+	const [showAddTask, setShowAddTask] = useState(false)
+   
+	const tasks = useTasks()
+    const dispatch = useTasksDispatch()
     const handleSearch = (e) => {
         e.preventDefault()
            setsearch(e.target.value)
@@ -19,18 +23,30 @@ const Items = () => {
        
     }
 
+	const handleDeleteAll = () => {
+		if (window.confirm("Are you sure you want to delete all tasks?")) {
+			dispatch({
+				type: "Delete_All",
+			})
+			notify()
+		}
+	
+	}
+
 	let content= []
 	if(tasks.length>0){
 		content = tasks.filter(task=>task.Title.toLowerCase().includes(search.toLocaleLowerCase())).map((task) => (
 			<SingleTask key={task.id} task={task}/>
 				))
-	}else{
+	}
+	
+	else{
 		content = <tr className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
 		<td colSpan="4" className="text-center">No Tasks Available ,Add some new tasks</td>
 	</tr>
 	}
   return (
-    <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
+    <div className=" relative rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 				<div className="mb-14 items-center justify-between sm:flex">
 					<h2 className="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
 					<div className="flex items-center space-x-5">
@@ -51,8 +67,8 @@ const Items = () => {
 								</div>
 							</div>
 						</form>
-						<button className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold">Add Task</button>
-						<button className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold">Delete All</button>
+						<button onClick={()=>setShowAddTask(true)} className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold">Add Task</button>
+						<button onClick={handleDeleteAll} className="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold">Delete All</button>
 					</div>
 				</div>
 				<div className="overflow-auto">
@@ -60,11 +76,17 @@ const Items = () => {
 						<TableHead/>
 						<tbody>
                     {
-						content
+						content.length>0?content:<tr className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
+						<td colSpan="4" className="text-center">No such Task Found</td>
+					</tr>
+
                     }
 						</tbody>
 					</table>
 				</div>
+             {showAddTask && <div style={{position:"absolute" ,top:"60%" ,left:"50%" ,transform:"translate(-50%,-50%)"}}> <AddTask setShowAddTask={setShowAddTask}/> </div>}
+            
+			
 			</div>
   )
 }
