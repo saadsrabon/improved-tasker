@@ -1,10 +1,16 @@
+import { useState } from "react"
 import { useTasks } from "../utils/Utils"
 import SingleTask from "./SingleTask"
 import TableHead from "./TableHead"
 
 
 const Items = () => {
+    const [search, setsearch] =useState('')
     const tasks = useTasks()
+
+    const handleSearch = (e) => {
+           setsearch(e.target.value)
+    }
   return (
     <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 				<div className="mb-14 items-center justify-between sm:flex">
@@ -13,7 +19,7 @@ const Items = () => {
 						<form>
 							<div className="flex">
 								<div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
-									<input type="search" id="search-dropdown"
+									<input value={search} onChange={handleSearch} type="search" id="search-dropdown"
 										className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none" placeholder="Search Task"
 										required />
 									<button type="submit" className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4">
@@ -36,7 +42,7 @@ const Items = () => {
 						<TableHead/>
 						<tbody>
                     {
-                    tasks.map((task) => (
+                    tasks.filter(task=>task.Title.toLowerCase().includes(search)).map((task) => (
                      <SingleTask key={task.id} task={task}/>
                          ))}
 						</tbody>
