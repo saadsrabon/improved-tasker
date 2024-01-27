@@ -3,12 +3,32 @@
 import {  useTasksDispatch } from "../utils/Utils"
 import Tag from "./tag"
 
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const SingleTask = ({task}) => {
     const dispacth =useTasksDispatch()
     const {isfavourite,Description,Tags,Priority,Title,id}=task
+    const notify = () => toast.success('Task Deleted Successfully', {
+		position: "bottom-right",
+		autoClose: 2000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true
+		});
+     const handleDelete = (id) => {
 
-  return (
+    
+         if (window.confirm("Are you sure you want to delete this task?")) {
+            dispacth({
+                type: 'DELETE_TASK',
+                payload: id,
+            });
+			
+		}
+     notify()
+     }
+  return (<>
     <tr className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
 								<td>{
                                     isfavourite?<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-star" width="24"
@@ -42,14 +62,15 @@ const SingleTask = ({task}) => {
 								<td className="text-center">High</td>
 								<td>
 									<div className="flex items-center justify-center space-x-3">
-										<button onClick={()=>dispacth({
-                                            type:'DELETE_TASK',
-                                            payload:id
-                                        })} className="text-red-500">Delete</button>
+										<button onClick={()=>handleDelete(id)} className="text-red-500">Delete</button>
 										<button className="text-blue-500">Edit</button>
 									</div>
 								</td>
 							</tr>
+		
+		
+										<ToastContainer  />
+  </>
   )
 }
 

@@ -18,6 +18,17 @@ const Items = () => {
         setsearch(e.target.search.value)
        
     }
+
+	let content= []
+	if(tasks.length>0){
+		content = tasks.filter(task=>task.Title.toLowerCase().includes(search.toLocaleLowerCase())).map((task) => (
+			<SingleTask key={task.id} task={task}/>
+				))
+	}else{
+		content = <tr className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
+		<td colSpan="4" className="text-center">No Tasks Available ,Add some new tasks</td>
+	</tr>
+	}
   return (
     <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 				<div className="mb-14 items-center justify-between sm:flex">
@@ -49,9 +60,8 @@ const Items = () => {
 						<TableHead/>
 						<tbody>
                     {
-                    tasks.filter(task=>task.Title.toLowerCase().includes(search.toLocaleLowerCase())).map((task) => (
-                     <SingleTask key={task.id} task={task}/>
-                         ))}
+						content
+                    }
 						</tbody>
 					</table>
 				</div>
