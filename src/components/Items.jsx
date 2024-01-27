@@ -9,17 +9,24 @@ const Items = () => {
     const tasks = useTasks()
 
     const handleSearch = (e) => {
+        e.preventDefault()
            setsearch(e.target.value)
+
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setsearch(e.target.search.value)
+       
     }
   return (
     <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 				<div className="mb-14 items-center justify-between sm:flex">
 					<h2 className="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
 					<div className="flex items-center space-x-5">
-						<form>
+						<form onSubmit={handleSubmit}>
 							<div className="flex">
 								<div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
-									<input value={search} onChange={handleSearch} type="search" id="search-dropdown"
+									<input name="search" value={search} onChange={handleSearch} type="search" id="search-dropdown"
 										className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none" placeholder="Search Task"
 										required />
 									<button type="submit" className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4">
@@ -42,7 +49,7 @@ const Items = () => {
 						<TableHead/>
 						<tbody>
                     {
-                    tasks.filter(task=>task.Title.toLowerCase().includes(search)).map((task) => (
+                    tasks.filter(task=>task.Title.toLowerCase().includes(search.toLocaleLowerCase())).map((task) => (
                      <SingleTask key={task.id} task={task}/>
                          ))}
 						</tbody>
